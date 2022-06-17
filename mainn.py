@@ -4,6 +4,7 @@ from cuadros import CuadroNuevo
 from colorama import Fore, init
 init()
 
+
 url = 'https://api.nasa.gov/EPIC/api/natural?api_key=DEMO_KEY'
 
 http_rsp = requests.get(url)
@@ -13,6 +14,7 @@ cuadros_rsp = http_rsp.json()
 
 cuadros = []
 compras = []
+
 
 for cuadro in cuadros_rsp:
     cuadros.append(Cuadro(cuadro['identifier'], cuadro['image']))
@@ -35,6 +37,7 @@ def menu():
                 print(cuadro)
             print('Coloca el ID de la imagen que desee')
             id_cuadro = input('<<')
+            print(f'Ingrese la opcion 2) para personalizar su cuadro! \n')
 
 
 
@@ -51,24 +54,26 @@ def menu():
             print("8) 70x100 --> PRECIO: $4000")
 
             medidas = input('Coloca la opcion que desees: >>')
+            precio = 0
 
-            print('Elije la opcion que desee: Galaxia, Estrellas o Agujero negro')
-            imagen = input('<<')
 
-            mi_cuadro = CuadroNuevo(medidas, imagen)
+
+            mi_cuadro = CuadroNuevo(medidas, precio)
             print(mi_cuadro)
 
             dict = {}
             dict["ID cuadro"] = id_cuadro
             dict["Medidas del cuadro"] = medidas
-            dict["Diseño del cuadro"] = imagen
+            dict["Precio del cuadro"] = precio
             compras.append(dict)
 
         elif option == '3':
-            print(f"Listado de compras {compras}")
+            print(f"Listado de compras: {compras}")
 
 
         elif option == '4':
+            print('El programa finalizo, gracias por comprar en Cuadros Espaciales')
+            print('Que tenga un hermoso dia! :)')
             break
 
         else:
@@ -78,4 +83,3 @@ def menu():
 #CODIGO:
 
 menu()
-
